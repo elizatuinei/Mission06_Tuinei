@@ -1,0 +1,45 @@
+﻿@model Mission06_Tuinei.Models.Application
+<!-- New Movie Form Page -->
+<section id="new-movie">
+    <h1>Add New Movie</h1>
+    <form method="post">
+        <!-- Movie details input fields -->
+        <label asp-for="Category">Category:</label>
+        <input asp-for="Category" type="text" name="category" required>
+        <br /><br />
+        <label asp-for="Title">Title:</label>
+        <input asp-for="Title"type="text" name="title" required>
+        <br /><br />
+        <label asp-for="Year">Year:</label>
+        <input asp-for="Year" type="number" name="year" required>
+        <br /><br />
+        <label asp-for="Director">Director:</label>
+        <input asp-for="Director" type="text" name="director" required>
+        <br /><br />
+        <!-- Dropdown for Rating -->
+        <label asp-for="Rating">Rating:</label>
+        <select asp-for="Rating" name="rating" required>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+        <br /><br />
+        <!-- Checkbox for Edited -->
+        <label asp-for="Edited">Is the Movie Edited?</label>
+        <select asp-for="Edited">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select><!-- "true" will be submitted when checked -->
+        <br /><br />
+        <!-- Optional input fields -->
+        <label asp-for="Lent_to">Lent To:</label>
+        <input asp-for="Lent_to" type="text" name="lent_to">
+        <br /><br />
+        <label asp-for="Notes">Notes (max 25 characters):</label>
+        <input asp-for="Notes" type="text" name="notes" maxlength="25">
+        <br /><br />
+        <!-- Submit button -->
+        <button type="submit">Submit</button>
+    </form>
+</section>

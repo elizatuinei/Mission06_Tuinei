@@ -1,8 +1,12 @@
-﻿namespace Mission06_Tuinei.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mission06_Tuinei.Models
 {
     public class Application
     {
         // get is a read only variable
+        [Key]
+        [Required]
         public int MovieFormID { get; set; }
 
         public string Category { get; set; }

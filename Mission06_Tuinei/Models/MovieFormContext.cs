@@ -10,7 +10,7 @@ namespace Mission06_Tuinei.Models
         {
 
         }
-        public DbSet<Application> Applications { get; set; }
+        public DbSet<Mission06_Tuinei.Models.Application> Applications { get; set; }
 
 
     }

@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Mission06_Tuinei.Models.Application>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Rating</th>
+            <th>Edited</th>
+            <th>Lent_to</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.Category</td>
+                <td>@application.Title</td>
+                <td>@application.Year</td>
+                <td>@application.Director</td>
+                <td>@application.Rating</td>
+                <td>@application.Edited</td>
+                <td>@application.Lent_to</td>
+                <td>@application.Notes</td>
+                <td>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-MovieFormID="@application.MovieFormID">Edit</a> |
+                    <a asp-controller="Home" asp-action="Delete" asp-route-MovieFormID="@application.MovieFormID">Delete</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>

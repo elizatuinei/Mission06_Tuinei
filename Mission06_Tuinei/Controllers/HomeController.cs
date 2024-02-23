@@ -33,70 +33,92 @@ namespace Mission06_Tuinei.Controllers
         [HttpGet]
         public IActionResult NewMovieForm()
         {
-            return View();
+            ViewBag.Categories = _context.Categories.ToList();
+            return View(new Movie());
         }
         [HttpPost]
-        public IActionResult NewMovieForm(Mission06_Tuinei.Models.Application response)
+        public IActionResult NewMovieForm(Movie response)
         {
-            _context.Applications.Add(response);
-            _context.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(response);
+                _context.SaveChanges();
+
 
             return View("Confirmation", response);
+
+            }
+
+            else
+
+            {
+
+                ViewBag.Categories = _context.Categories.Include("Category").ToList(); // Assuming you want to execute the query and materialize the results
+
+                return View(response);
+            }
+
         }
-        public IActionResult MovieSubmissions ()
+
+        [HttpGet]
+        public IActionResult MovieSubmissions()
         // go out to context file and applications table
         // and go find...
         {
+            var movieList = _context.Movies.Include("Category").ToList();
 
-            var applications = _context.Applications
-                .Where(x => x.Rating == "G" || x.Rating == "PG" || x.Rating == "PG-13")
-                .OrderBy(x => x.Title)
-                .ToList(); // Assuming you want to execute the query and materialize the results
-
-            return View(applications);
+            return View(movieList);
         }
 
+        [HttpGet]
         public IActionResult Edit(int MovieFormID)
         {
-            var applications = _context.Applications.Find(MovieFormID);
+            var movieEdits = _context.Movies
+                .Single(x => x.MovieId == MovieFormID);
 
-            if (applications == null)
-            {
-                // Handle the case where the movie ID is not found (e.g., show an error page)
-                return RedirectToAction("MovieSubmissions");
-            }
+            ViewBag.Categories = _context.Categories.ToList();
 
-            return View(applications);
+            return View("NewMovieForm", movieEdits);
         }
 
         [HttpPost]
-        public IActionResult Edit(Mission06_Tuinei.Models.Application editedApplication)
+        public IActionResult Edit(Movie editedApplication)
         {
-            _context.Update(editedApplication);
-            _context.SaveChanges();
-            return RedirectToAction("MovieSubmissions");
+            if(ModelState.IsValid)
+            {
+                _context.Update(editedApplication);
+                _context.SaveChanges();
+
+                return RedirectToAction("MovieSubmissions");
+            }    
+            else
+            {
+                ViewBag.Categories = _context.Categories.ToList();
+
+                return View("NewMovieForm", editedApplication);
+            }
+
         }
 
 
         public IActionResult Delete(int MovieFormID)
         {
-            var application = _context.Applications.Find(MovieFormID);
-            return View(application);
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == MovieFormID);
+
+            return View(recordToDelete);
         }
 
         [HttpPost]
-        public IActionResult DeleteConfirmed(int MovieFormID)
+        public IActionResult DeleteConfirmed(Movie deletedInfo)
         {
-            var application = _context.Applications.Find(MovieFormID);
 
-            if (application == null)
-            {
-                // Handle the case where the movie ID is not found (e.g., show an error page)
-                return RedirectToAction("MovieSubmissions");
-            }
-
-            _context.Applications.Remove(application);
+            // Delete the record and save the change to the db
+            _context.Movies.Remove(deletedInfo);
             _context.SaveChanges();
+
+            // redirect to the Collection action to show the records
             return RedirectToAction("MovieSubmissions");
         }
 

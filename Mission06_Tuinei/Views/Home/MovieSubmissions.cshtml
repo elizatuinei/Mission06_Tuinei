@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model List<Mission06_Tuinei.Models.Application>
+@model List<Mission06_Tuinei.Models.Movie>
 
 <table class="table table-bordered">
     <thead>
@@ -14,25 +14,27 @@
             <th>Director</th>
             <th>Rating</th>
             <th>Edited</th>
-            <th>Lent_to</th>
+            <th>Lent To</th>
+            <th>Copied To Plex</th>
             <th>Notes</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var application in Model)
+        @foreach (var movieList in Model)
         {
             <tr>
-                <td>@application.Category</td>
-                <td>@application.Title</td>
-                <td>@application.Year</td>
-                <td>@application.Director</td>
-                <td>@application.Rating</td>
-                <td>@application.Edited</td>
-                <td>@application.Lent_to</td>
-                <td>@application.Notes</td>
+                <td>@movieList.Category.CategoryName</td>
+                <td>@movieList.Title</td>
+                <td>@movieList.Year</td>
+                <td>@movieList.Director</td>
+                <td>@movieList.Rating</td>
+                <td>@movieList.Edited</td>
+                <td>@movieList.LentTo</td>
+                <td>@movieList.CopiedToPlex</td>
+                <td>@movieList.Notes</td>
                 <td>
-                    <a asp-controller="Home" asp-action="Edit" asp-route-MovieFormID="@application.MovieFormID">Edit</a> |
-                    <a asp-controller="Home" asp-action="Delete" asp-route-MovieFormID="@application.MovieFormID">Delete</a>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-MovieFormID="@movieList.MovieId">Edit</a> |
+                    <a asp-controller="Home" asp-action="Delete" asp-route-MovieFormID="@movieList.MovieId">Delete</a>
                 </td>
 
             </tr>

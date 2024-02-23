@@ -3,15 +3,31 @@
 *@
 @{
 }
-@model Mission06_Tuinei.Models.Application
+@model Mission06_Tuinei.Models.Movie
 
 <div class="container mt-4">
     <h2>Edit Movie</h2>
     <form asp-action="Edit">
-        <input type="hidden" asp-for="MovieFormID" />
+        <input type="hidden" asp-for="MovieId" />
         <div class="form-group">
+            <label asp-for="Category"></label>
+            <input asp-for="Category" class="form-control" />
             <label asp-for="Title"></label>
             <input asp-for="Title" class="form-control" />
+            <label asp-for="Year"></label>
+            <input asp-for="Year" class="form-control" />
+            <label asp-for="Director"></label>
+            <input asp-for="Director" class="form-control" />
+            <label asp-for="Rating"></label>
+            <input asp-for="Rating" class="form-control" />
+            <label asp-for="Edited"></label>
+            <input asp-for="Edited" class="form-control" />
+            <label asp-for="LentTo"></label>
+            <input asp-for="LentTo" class="form-control" />
+            <label asp-for="Notes"></label>
+            <input asp-for="Notes" class="form-control" />
+
+
         </div>
         <!-- Add more fields as needed -->
         <button type="submit" class="btn btn-primary">Save Changes</button>
